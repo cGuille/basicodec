@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>HTTP Basic Auth Codec</title>
+</head>
+<body>
+    <h1>HTTP basic Auth Codec</h1>
+    <section id="encode">
+        <h2>Encode</h2>
+
+        <p>
+            <label for="encode-username">Username:</label>
+            <input type="text" id="encode-username" />
+        </p>
+
+        <p>
+            <label for="encode-password">Password:</label>
+            <input type="text" id="encode-password" />
+        </p>
+
+        <div>
+            <code>Authorization: Basic</code>
+            <code id="encode-result"></code>
+        </div>
+
+    </section>
+
+    <section id="decode">
+        <h2>Decode</h2>
+
+        <p>
+            <label for="decode-auth-header">Header:</label>
+            <input type="text" id="decode-auth-header" />
+        </p>
+
+        <p>
+            Username:
+            <code id="decoded-username"></code>
+        </p>
+
+        <p>
+            Password:
+            <code id="decoded-password"></code>
+        </p>
+    </section>
+
+    <script src="basicodec.js"></script>
+</body>
+</html>
