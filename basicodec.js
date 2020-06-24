@@ -9,7 +9,7 @@ function encode() {
     encodeResultElt.textContent = btoa(`${username}:${password}`);
 }
 
-[usernameInput, passwordInput].forEach(inputElt => inputElt.addEventListener('keyup', encode));
+[usernameInput, passwordInput].forEach(inputElt => inputElt.addEventListener('input', encode));
 
 const authHeaderInput = document.getElementById('decode-auth-header');
 const decodedUsernameElt = document.getElementById('decoded-username');
@@ -41,4 +41,4 @@ function decode() {
     }
 }
 
-authHeaderInput.addEventListener('keyup', decode);
+authHeaderInput.addEventListener('input', decode);
