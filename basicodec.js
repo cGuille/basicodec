@@ -13,7 +13,13 @@ function encode() {
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    encodeResultElt.textContent = btoa(`${username}:${password}`);
+    let headerValue = '';
+
+    if (username || password) {
+        headerValue = `Authorization: Basic ${btoa(`${username}:${password}`)}`;
+    }
+
+    encodeResultElt.textContent = headerValue;
 }
 
 const authHeaderRegex = /(?:Authorization: *)?(?:Basic +)?(\b[A-Za-z0-9+/=]+\b)/i;
