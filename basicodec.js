@@ -20,6 +20,11 @@ function encode() {
     }
 
     encodeResultElt.textContent = headerValue;
+
+    if (authHeaderInput.value !== headerValue) {
+        authHeaderInput.value = headerValue;
+        authHeaderInput.dispatchEvent(new Event('input'));
+    }
 }
 
 const authHeaderRegex = /(?:Authorization: *)?(?:Basic +)?(\b[A-Za-z0-9+/=]+\b)/i;
@@ -27,22 +32,30 @@ function decode() {
     const authHeader = authHeaderInput.value;
     const matches = authHeaderRegex.exec(authHeader);
 
-    if (!matches) {
-        decodedUsernameElt.textContent = '';
-        decodedPasswordElt.textContent = '';
+    let username = '';
+    let password = '';
 
-        return;
+    if (matches) {
+        try {
+            const parts = atob(matches[1]).split(':', 2);
+
+            username = parts[0];
+            password = parts[1];
+        } catch (error) {
+            // ok nevermind
+        }
     }
 
-    try {
-        const parts = atob(matches[1]).split(':', 2);
+    decodedUsernameElt.textContent = username;
+    decodedPasswordElt.textContent = password;
 
-        decodedUsernameElt.textContent = parts[0];
-        decodedPasswordElt.textContent = parts[1];
-    } catch (error) {
-        decodedUsernameElt.textContent = '';
-        decodedPasswordElt.textContent = '';
+    if (usernameInput.value !== username) {
+        usernameInput.value = username;
+        usernameInput.dispatchEvent(new Event('input'));
+    }
 
-        return;
+    if (passwordInput.value !== password) {
+        passwordInput.value = password;
+        passwordInput.dispatchEvent(new Event('input'));
     }
 }
