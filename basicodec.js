@@ -2,6 +2,13 @@ const usernameInput = document.getElementById('encode-username');
 const passwordInput = document.getElementById('encode-password');
 const encodeResultElt = document.getElementById('encode-result');
 
+const authHeaderInput = document.getElementById('decode-auth-header');
+const decodedUsernameElt = document.getElementById('decoded-username');
+const decodedPasswordElt = document.getElementById('decoded-password');
+
+[usernameInput, passwordInput].forEach(inputElt => inputElt.addEventListener('input', encode));
+authHeaderInput.addEventListener('input', decode);
+
 function encode() {
     const username = usernameInput.value;
     const password = passwordInput.value;
@@ -9,14 +16,7 @@ function encode() {
     encodeResultElt.textContent = btoa(`${username}:${password}`);
 }
 
-[usernameInput, passwordInput].forEach(inputElt => inputElt.addEventListener('input', encode));
-
-const authHeaderInput = document.getElementById('decode-auth-header');
-const decodedUsernameElt = document.getElementById('decoded-username');
-const decodedPasswordElt = document.getElementById('decoded-password');
-
 const authHeaderRegex = /(?:Authorization: *)?(?:Basic +)?(\b[A-Za-z0-9+/=]+\b)/i;
-
 function decode() {
     const authHeader = authHeaderInput.value;
     const matches = authHeaderRegex.exec(authHeader);
@@ -40,5 +40,3 @@ function decode() {
         return;
     }
 }
-
-authHeaderInput.addEventListener('input', decode);
