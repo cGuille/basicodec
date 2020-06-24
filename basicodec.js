@@ -15,7 +15,7 @@ const authHeaderInput = document.getElementById('decode-auth-header');
 const decodedUsernameElt = document.getElementById('decoded-username');
 const decodedPasswordElt = document.getElementById('decoded-password');
 
-const authHeaderRegex = /(?:Authorization: *)?(?:Basic +)?(.*)/i;
+const authHeaderRegex = /(?:Authorization: *)?(?:Basic +)?(\b[A-Za-z0-9+/=]+\b)/i;
 
 function decode() {
     const authHeader = authHeaderInput.value;
